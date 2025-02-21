@@ -1,90 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome Page and Introduction</title>
-  </head>
+    <title>In My Lightcone</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Permanent+Marker&display=swap" rel="stylesheet">
+   </head>
+<body>
+
+   <header>
+   <div class="navbar">
+      <div class="blog-details">
+        In My Lightcone 
+      </div>
+
+          <nav class="nav-links">
+           
+          <a href=>About</a>
+          <a href="tags.html">Tags</a>
+          <a href=>Notes </a>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+  <div class="introduction">
+    <h1> Blog</h1>
+
+  </div>
+
+  <div 
+  id="blog-posts"
+  class="posts">
+
+    <script>
+      // Blog post array (in a real app, you'd fetch this from a backend)
+      const posts = [
+          {
+              title: "First Blog Post",
+              date: "2025-02-17",
+              category: "Web Development",
+              tags: ["HTML", "CSS"]
+          },
+          {
+              title: "Learning JavaScript",
+              date: "2025-02-18",
+              category: "JavaScript",
+              tags: ["JavaScript", "Beginner"]
+          }
+      ];
+
+      function displayPosts() {
+          const blogContainer = document.getElementById("blog-posts");
+          blogContainer.innerHTML = ""; // Clear old content
+
+          posts.forEach(post => {
+              const postElement = document.createElement("div");
+              postElement.classList.add("post");
+              postElement.innerHTML = `
+                  <h2>${post.title}</h2>
+                  <p><strong>Date:</strong> ${post.date}</p>
+                  <p><strong>Category:</strong> <a href="categories.html?category=${post.category}">${post.category}</a></p>
+                  <p><strong>Tags:</strong> ${post.tags.map(tag => `<a href="tags.html?tag=${tag}">${tag}</a>`).join(", ")}</p>
+              `;
+              blogContainer.appendChild(postElement);
+          });
+      }
+
+      displayPosts();
+  </script>
+
+  </div>
+
+</main>
 
 
 
-<body >
-  <h1>YOUR NAME</h1>
-  <p>
-  <ul>
-    <li>  Hello    </li>
-    <li>  Hello    </li>
-    <li>  Hello    </li>
-    
-  </ul>  
-
-  </p>
-<div style="background-color:#8d1de9;">
-  <p >
-    <ul>
-      <li>  Hello    </li>
-      <li>  Hello    </li>
-      <li>  Hello    </li>
-      
-    </ul>  
-  
-    </p>
-    
-</div>
-
-    <div style="background-color:rgb(175, 21, 54);">
-    <p >
-      <ul>
-        <li>  Hello    </li>
-        <li>  Hello    </li>
-        <li>  Hello    </li>
-        
-      </ul>  
-    
-      </p>
-
-</div>
-<div style="background-color:rgb(156, 223, 42);">
-      <p >
-        <ul>
-          <li>  Hello    </li>
-          <li>  Hello    </li>
-          <li>  Hello    </li>
-          
-        </ul>  
-      
-        </p>
+<footer>
 
 
-</div>
-<div>
+</footer>
 
-        <p style="background-color:rgb(71, 255, 120);">
-          <ul>
-            <li>  Hello    </li>
-            <li>  Hello    </li>
-            <li>  Hello    </li>
-            
-          </ul>  
-        
-          </p>
-
-</div>
-<div>
-
-          <p style="background-color:tomato;">
-            <ul>
-              <li>  Hello    </li>
-              <li>  Hello    </li>
-              <li>  Hello    </li>
-              
-            </ul>  
-          
-            </p>
-
-</div>
 </body>
-
-
 
 </html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tags</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Posts by Tag</h1>
+    <div id="tag-results"></div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedTag = urlParams.get("tag");
+        document.title = `Posts tagged with ${selectedTag}`;
+
+        const posts = [
+            { title: "First Blog Post", date: "2025-02-17", category: "Web Development", tags: ["HTML", "CSS"] },
+            { title: "Learning JavaScript", date: "2025-02-18", category: "JavaScript", tags: ["JavaScript", "Beginner"] }
+        ];
+
+        function filterByTag(tag) {
+            return posts.filter(post => post.tags.includes(tag));
+        }
+
+        function displayTagResults() {
+            const resultsContainer = document.getElementById("tag-results");
+            resultsContainer.innerHTML = "";
+
+            const filteredPosts = filterByTag(selectedTag);
+
+            if (filteredPosts.length === 0) {
+                resultsContainer.innerHTML = `<p>No posts found for tag: ${selectedTag}</p>`;
+                return;
+            }
+
+            filteredPosts.forEach(post => {
+                const postElement = document.createElement("div");
+                postElement.innerHTML = `<h2>${post.title}</h2><p><strong>Date:</strong> ${post.date}</p>`;
+                resultsContainer.appendChild(postElement);
+            });
+        }
+
+        displayTagResults();
+    </script>
+</body>
+</html>

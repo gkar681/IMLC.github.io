@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Posts by Category</h1>
+    <div id="category-results"></div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedCategory = urlParams.get("category");
+        document.title = `Posts in ${selectedCategory}`;
+
+        const posts = [
+            { title: "First Blog Post", date: "2025-02-17", category: "Web Development", tags: ["HTML", "CSS"] },
+            { title: "Learning JavaScript", date: "2025-02-18", category: "JavaScript", tags: ["JavaScript", "Beginner"] }
+        ];
+
+        function filterByCategory(category) {
+            return posts.filter(post => post.category === category);
+        }
+
+        function displayCategoryResults() {
+            const resultsContainer = document.getElementById("category-results");
+            resultsContainer.innerHTML = "";
+
+            const filteredPosts = filterByCategory(selectedCategory);
+
+            if (filteredPosts.length === 0) {
+                resultsContainer.innerHTML = `<p>No posts found in category: ${selectedCategory}</p>`;
+                return;
+            }
+
+            filteredPosts.forEach(post => {
+                const postElement = document.createElement("div");
+                postElement.innerHTML = `<h2>${post.title}</h2><p><strong>Date:</strong> ${post.date}</p>`;
+                resultsContainer.appendChild(postElement);
+            });
+        }
+
+        displayCategoryResults();
+    </script>
+</body>
+</html>

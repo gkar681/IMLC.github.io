@@ -1,0 +1,133 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html, body {
+    display: flex;
+    flex-direction: column;
+    height:auto;
+    min-height: 100vh; /* Full viewport height */
+    min-width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-image: url('../images/background2.png');/* Change background image here */
+}
+
+header {
+
+background-color: #020248;
+color: white;
+padding: 10px;
+width:100%;
+
+
+}
+
+
+
+
+.navbar{
+
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    width: 100%;
+    height:6vh;
+    background-color: #020248; /* Ensures background color is consistent */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow for more depth */
+    padding: 15px 50px; /* Add some padding for spacing */
+    position: fixed; /* Keep the navbar fixed at the top */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000; /* Ensures it stays above other elements */
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1); /* Soft bottom border for contrast */
+
+}
+
+
+.blog-details{
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight:700;
+    color: #FFFFFF;
+    text-align: center;
+
+   
+}
+
+
+    h1{
+
+    font-family: 'Permanant Marker', cursive;
+    font-size: 48px;
+    left:0;
+
+
+
+    }
+
+
+
+.nav-links {
+    display: flex;   
+    gap: 10px; /* Space between links */
+
+}
+
+.nav-links a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    font-family: 'Merriweather', serif;
+    padding:10px;
+   
+}
+
+
+.introduction {
+
+    
+    padding: 300px;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+
+}
+
+.post {
+
+    margin: 0 auto;
+    padding: 20px;
+
+}
+
+
+
+
+
+
+
+.post {
+    border-radius: 40px;
+    border-top: 9px solid #000;
+    border-bottom: 9px solid #000;
+    display: flex;
+    height: 18vh;
+    padding: 40px 979px 181px 105px;
+    align-items: center;
+    flex-shrink: 0;
+    align-self: stretch;
+    margin:150px;
+
+    
+}
