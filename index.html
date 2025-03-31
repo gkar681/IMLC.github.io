@@ -16,8 +16,8 @@
       </div>
 
           <nav class="nav-links">
-           
-          <a href=>About</a>
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
           <a href="tags.html">Tags</a>
           <a href=>Notes </a>
         </nav>
@@ -39,16 +39,19 @@
       // Blog post array (in a real app, you'd fetch this from a backend)
       const posts = [
           {
-              title: "First Blog Post",
-              date: "2025-02-17",
+              title: "My First Blog Post",
+              date: "2024-11-13",
               category: "Web Development",
-              tags: ["HTML", "CSS"]
+              tags: ["HTML", "CSS"],
+              slug: "first-blog-post",
+              abstract: "This is the content of my first blog post."
           },
           {
               title: "Learning JavaScript",
               date: "2025-02-18",
               category: "JavaScript",
-              tags: ["JavaScript", "Beginner"]
+              tags: ["JavaScript", "Beginner"],
+              slug: "learning-javascript"
           }
       ];
 
@@ -60,10 +63,21 @@
               const postElement = document.createElement("div");
               postElement.classList.add("post");
               postElement.innerHTML = `
-                  <h2>${post.title}</h2>
-                  <p><strong>Date:</strong> ${post.date}</p>
-                  <p><strong>Category:</strong> <a href="categories.html?category=${post.category}">${post.category}</a></p>
-                  <p><strong>Tags:</strong> ${post.tags.map(tag => `<a href="tags.html?tag=${tag}">${tag}</a>`).join(", ")}</p>
+                  <div class="post-main-content">
+                      <h3><a href="posts/${post.slug}.html">${post.title}</a></h3>
+                      <div class="post-metadata">
+                          <span class="date">${post.date}</span> • 
+                          <span class="category"><a href="categories.html?category=${post.category}">${post.category}</a></span> • 
+                          <span class="tags">${post.tags.map(tag => 
+                              `<a href="tags.html?tag=${tag}">${tag}</a>`
+                          ).join(", ")}</span>
+                      </div>
+                  </div>
+                  <div class="post-abstract">
+                      <a href="posts/${post.slug}.html">
+                          <p>${post.abstract || "This is a placeholder abstract for the blog post. Click to read more..."}</p>
+                      </a>
+                  </div>
               `;
               blogContainer.appendChild(postElement);
           });

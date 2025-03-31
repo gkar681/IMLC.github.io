@@ -1,0 +1,9 @@
+{
+    "id": 1,
+    "title": "My First Blog Post",
+    "date": "2024-11-13",
+    "category": "Web Development",
+    "tags": ["HTML", "CSS"],
+    "content": "<p>This is the content of my first blog post.</p><p>You can use HTML tags in your content.</p>",
+    "abstract": "This is the content of my first blog post."
+} 

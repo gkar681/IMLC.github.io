@@ -53,12 +53,11 @@ width:100%;
 .blog-details{
     display: flex;
     align-items: center;
-    font-size: 24px;
+    font-size: 28px;
     font-weight:700;
     color: #FFFFFF;
     text-align: center;
-
-   
+    letter-spacing: 1px;
 }
 
 
@@ -91,43 +90,435 @@ width:100%;
 
 
 .introduction {
-
-    
-    padding: 300px;
-    border-radius: 30px;
+    padding: 100px 0 20px 0;  /* Reduced padding */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;  /* Align to the left */
     text-align: left;
     position: relative;
     z-index: 1;
+    width: 80%;
+    margin: 0 auto;
+}
 
+.introduction h1 {
+    font-size: 36px;  /* Smaller title */
+   
 }
 
 .post {
+    margin: 10px auto;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+    width: 80%;
+}
 
+.post-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.post h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    line-height: 1;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.post h3 a {
+    color: #020248;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.post h3 a:hover {
+    color: #0303a9;
+}
+
+.post-metadata {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.post-metadata a {
+    color: #020248;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.post-metadata a:hover {
+    color: #0303a9;
+}
+
+.post-abstract {
+    padding-left: 40px;
+    border-left: 2px solid #e0e0e0;
+}
+
+.post-abstract a {
+    text-decoration: none;
+}
+
+.post-abstract p {
+    color: #444;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0;
+    font-style: italic;
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.post-abstract:hover p {
+    color: #020248;
+}
+
+/* Posts container spacing */
+.posts {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tags-section {
+    margin: 50px 0 20px 0;  /* Reduced bottom margin */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* Align to the left */
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;  /* Slightly reduced gap */
+    margin-bottom: 30px;
+    justify-content: flex-start;  /* Align tags to the left */
+    width: 100%;
+}
+
+.tag-button {
+    padding: 10px 16px;
+    background-color: transparent;
+    border: 3px solid #050010;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Base tag colors - will be used for any tag */
+.tag-button[data-tag] {
+    color: var(--tag-color, #666); /* Default color if none matched */
+}
+
+/* Tag category colors - add more as needed */
+/* Programming Languages */
+.tag-button[data-tag="JavaScript"] { --tag-color: #f7df1e; }
+.tag-button[data-tag="Python"] { --tag-color: #306998; }
+.tag-button[data-tag="Java"] { --tag-color: #f89820; }
+.tag-button[data-tag="Ruby"] { --tag-color: #cc342d; }
+
+/* Web Technologies */
+.tag-button[data-tag="HTML"] { --tag-color: #e34c26; }
+.tag-button[data-tag="CSS"] { --tag-color: #264de4; }
+.tag-button[data-tag="React"] { --tag-color: #61dafb; }
+.tag-button[data-tag="Vue"] { --tag-color: #42b883; }
+.tag-button[data-tag="Angular"] { --tag-color: #dd1b16; }
+
+/* Development Concepts */
+.tag-button[data-tag="Frontend"] { --tag-color: #ff69b4; }
+.tag-button[data-tag="Backend"] { --tag-color: #6b46c1; }
+.tag-button[data-tag="DevOps"] { --tag-color: #2f73d8; }
+.tag-button[data-tag="API"] { --tag-color: #00ff00; }
+
+/* Skill Levels */
+.tag-button[data-tag="Beginner"] { --tag-color: #2ecc71; }
+.tag-button[data-tag="Intermediate"] { --tag-color: #f39c12; }
+.tag-button[data-tag="Advanced"] { --tag-color: #c0392b; }
+
+/* Tools & Frameworks */
+.tag-button[data-tag="Git"] { --tag-color: #f05032; }
+.tag-button[data-tag="Docker"] { --tag-color: #2496ed; }
+.tag-button[data-tag="AWS"] { --tag-color: #ff9900; }
+
+/* Topics */
+.tag-button[data-tag="Security"] { --tag-color: #ff4757; }
+.tag-button[data-tag="Performance"] { --tag-color: #5352ed; }
+.tag-button[data-tag="Design"] { --tag-color: #ff7f50; }
+.tag-button[data-tag="Database"] { --tag-color: #8e44ad; }
+.tag-button[data-tag="Testing"] { --tag-color: #16a085; }
+
+/* When hovering, we can make the border more visible */
+.tag-button:hover {
+    transform: translateY(-2px);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0.9;
+}
+
+/* Style for the filtered posts section */
+#filtered-posts {
+    margin-top: 50px;  /* Reduced top margin */
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px 20px;
+}
+
+#filtered-posts h2 {
+    margin-bottom: 50px;  /* Reduced margin */
+    font-size: 24px;  /* Smaller heading */
+    text-align: left;  /* Align to the left */
+    color: #020248;
+}
+
+#filtered-posts .post {
+    margin: 50px auto;
+    padding: 30px 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;  /* Split into two columns */
+    gap: 40px;
+    align-items: start;
+}
+
+#filtered-posts .post-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#filtered-posts .post h3 {
+    font-size: 24px;
+    margin-bottom: 5px;
+    line-height: 1.3;
+}
+
+#filtered-posts .post-metadata {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+#filtered-posts .post-metadata a {
+    color: #020248;
+    text-decoration: none;
+}
+
+#filtered-posts .post-metadata span {
+    display: inline-block;
+}
+
+#filtered-posts .post-abstract {
+    padding-left: 40px;
+    border-left: 2px solid #e0e0e0;
+}
+
+#filtered-posts .post-abstract a {
+    text-decoration: none;
+}
+
+#filtered-posts .post-abstract p {
+    color: #444;
+    font-size: 16px;
+    line-height: 1.8;
+    margin: 0;
+    font-style: italic;
+}
+
+#filtered-posts .post-abstract:hover p {
+    color: #020248;
+}
+
+/* Remove old styles that might conflict */
+#filtered-posts .post p {
+    margin: 0;
+}
+
+.tag-button.selected {
+    background-color: var(--tag-color, #666);
+    color: white !important;
+    border-color: var(--tag-color, #666);
+}
+
+.selected-tag {
+    font-weight: bold;
+    text-decoration: underline !important;
+}
+
+/* Improve tag button interaction */
+.tag-button:hover {
+    transform: translateY(-2px);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0.9;
+}
+
+.tag-button.selected:hover {
+    opacity: 0.8;
+    transform: translateY(-2px);
+}
+
+/* Update title styles */
+h1, h2, h3, .blog-details {
+    font-family: 'Permanent Marker', cursive;
+}
+
+/* Update blog post content styles */
+.post-metadata, 
+.post-abstract p,
+.nav-links a,
+.tag-button,
+.post p {
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+/* Adjust some specific styles for better readability */
+.post-metadata {
+    font-size: 14px;  /* Slightly smaller for better readability with the new font */
+}
+
+.tag-button {
+    font-size: 14px;  /* Adjust tag button text size */
+    padding: 10px 16px;  /* Slightly more padding to accommodate the new font */
+}
+
+#filtered-posts .post h3 {
+    font-size: 24px;  /* Larger size for Permanent Marker headings */
+    line-height: 1.3;  /* Better line height for the decorative font */
+}
+
+.post-abstract p {
+    font-size: 16px;  /* Adjusted for better readability with Gloria Hallelujah */
+    line-height: 1.8;  /* More line height for better readability */
+}
+
+.blog-details {
+    font-size: 28px;  /* Adjusted for Permanent Marker */
+    letter-spacing: 1px;  /* Add slight spacing for better readability */
+}
+
+/* Blog post page styles */
+.blog-post {
+    width: 80%;
+    margin: 50px auto;
+    padding: 40px;
+}
+
+.blog-post h1 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: #020248;
+}
+
+.blog-post .post-metadata {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+.blog-post .post-metadata a {
+    color: #020248;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.blog-post .post-metadata a:hover {
+    color: #0303a9;
+}
+
+.blog-post .post-content {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+}
+
+.blog-post .post-content p {
+    margin-bottom: 20px;
+}
+
+/* About page styles */
+.about-main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: calc(100vh - 200px);
+}
+
+.about-content {
+    width: 100%;
+    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-
 }
 
+.about-content h1 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 48px;
+    color: #020248;
+    margin-bottom: 40px;
+    text-align: center;
+}
 
+.about-text {
+    font-family: 'Gloria Hallelujah', cursive;
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 60px;
+}
 
+.about-text p {
+    margin-bottom: 25px;
+}
 
+.about-image {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
 
+.about-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .about-content h1 {
+        font-size: 36px;
+    }
 
-.post {
-    border-radius: 40px;
-    border-top: 9px solid #000;
-    border-bottom: 9px solid #000;
-    display: flex;
-    height: 18vh;
-    padding: 40px 979px 181px 105px;
-    align-items: center;
-    flex-shrink: 0;
-    align-self: stretch;
-    margin:150px;
+    .about-text {
+        font-size: 16px;
+    }
 
-    
+    .about-image {
+        max-width: 100%;
+    }
 }

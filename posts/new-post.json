@@ -1,0 +1,9 @@
+{
+    "id": 2,
+    "title": "New Blog Post",
+    "date": "2024-03-20",
+    "category": "Technology",
+    "tags": ["JavaScript", "Web"],
+    "content": "<p>Your blog post content here.</p><p>You can use HTML for formatting.</p>",
+    "abstract": "A brief preview of your blog post."
+} 

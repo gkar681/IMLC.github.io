@@ -2,17 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blog</title>
-    <link rel="stylesheet" href="/styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Posts</title>
+    <style>
+        .post {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .post-meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .tags span {
+            background: #f0f0f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Blog</h1>
-    <ul>
+    <header>
+        <h1>Blog Posts</h1>
+    </header>
+    <main>
         <% posts.forEach(post => { %>
-            <li>
-                <a href="/post/<%= post.id %>"><%= post.title %></a> - <%= post.date %>
-            </li>
+            <article class="post">
+                <h2><a href="/blog/<%= post.slug %>"><%= post.title %></a></h2>
+                <div class="post-meta">
+                    <time><%= new Date(post.date).toLocaleDateString() %></time>
+                    • Category: <%= post.category %>
+                </div>
+                <div class="tags">
+                    <% post.tags.forEach(tag => { %>
+                        <span><%= tag %></span>
+                    <% }) %>
+                </div>
+                <%- post.content %>
+            </article>
         <% }) %>
-    </ul>
+    </main>
 </body>
 </html>

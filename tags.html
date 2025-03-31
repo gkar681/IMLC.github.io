@@ -3,46 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tags</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Tags - In My Lightcone</title>
+    <link rel="stylesheet" href="assets/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Permanent+Marker&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Posts by Tag</h1>
-    <div id="tag-results"></div>
+    <header>
+        <div class="navbar">
+            <div class="blog-details">
+                In My Lightcone 
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="tags.html">Tags</a>
+                <a href=>Notes</a>
+            </nav>
+        </div>
+    </header>
 
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const selectedTag = urlParams.get("tag");
-        document.title = `Posts tagged with ${selectedTag}`;
+    <main>
+        <div class="introduction">
+            <h1>Find posts by tag</h1>
+        </div>
 
-        const posts = [
-            { title: "First Blog Post", date: "2025-02-17", category: "Web Development", tags: ["HTML", "CSS"] },
-            { title: "Learning JavaScript", date: "2025-02-18", category: "JavaScript", tags: ["JavaScript", "Beginner"] }
-        ];
+        <div id="tags-container" class="tags-section">
+            <!-- Tags will be displayed here -->
+        </div>
 
-        function filterByTag(tag) {
-            return posts.filter(post => post.tags.includes(tag));
-        }
+        <div id="filtered-posts" class="posts">
+            <!-- Filtered posts will be displayed here -->
+        </div>
 
-        function displayTagResults() {
-            const resultsContainer = document.getElementById("tag-results");
-            resultsContainer.innerHTML = "";
+        <script>
+            // Using the same posts array as index.html
+            const posts = [
+                {
+                    title: "My First Blog Post",
+                    date: "2024-11-13",
+                    category: "Web Development",
+                    tags: ["HTML", "CSS"],
+                    slug: "first-blog-post",
+                    abstract: "This is the content of my first blog post."
+                },
+                {
+                    title: "Learning JavaScript",
+                    date: "2025-02-18",
+                    category: "JavaScript",
+                    tags: ["JavaScript", "Beginner"],
+                    slug: "learning-javascript"
+                }
+            ];
 
-            const filteredPosts = filterByTag(selectedTag);
+            // Add this at the top of your script
+            let selectedTags = new Set();
 
-            if (filteredPosts.length === 0) {
-                resultsContainer.innerHTML = `<p>No posts found for tag: ${selectedTag}</p>`;
-                return;
+            // Get all unique tags
+            function getAllTags() {
+                const tagsSet = new Set();
+                posts.forEach(post => {
+                    post.tags.forEach(tag => tagsSet.add(tag));
+                });
+                return Array.from(tagsSet);
             }
 
-            filteredPosts.forEach(post => {
-                const postElement = document.createElement("div");
-                postElement.innerHTML = `<h2>${post.title}</h2><p><strong>Date:</strong> ${post.date}</p>`;
-                resultsContainer.appendChild(postElement);
-            });
-        }
+            // Add this function before displayTags()
+            function getTagColor(tag) {
+                // Define a set of fallback colors for new tags
+                const fallbackColors = [
+                    '#3498db', '#e74c3c', '#2ecc71', '#f1c40f', '#9b59b6',
+                    '#1abc9c', '#e67e22', '#34495e', '#7f8c8d', '#16a085'
+                ];
+                
+                // Create a simple hash of the tag name to consistently pick a color
+                const hash = tag.split('').reduce((acc, char) => {
+                    return char.charCodeAt(0) + ((acc << 5) - acc);
+                }, 0);
+                
+                // Use the hash to pick a color from the fallback colors
+                return fallbackColors[Math.abs(hash) % fallbackColors.length];
+            }
 
-        displayTagResults();
-    </script>
+            // Modify the displayTags function
+            function displayTags() {
+                const tagsContainer = document.getElementById('tags-container');
+                const tags = getAllTags();
+                
+                tagsContainer.innerHTML = `
+                    <div class="tags-list">
+                        ${tags.map(tag => {
+                            const element = document.createElement('button');
+                            element.className = 'tag-button';
+                            element.setAttribute('data-tag', tag);
+                            document.body.appendChild(element);
+                            const computedColor = getComputedStyle(element).getPropertyValue('--tag-color');
+                            document.body.removeChild(element);
+
+                            const style = computedColor === '' ? 
+                                `style="color: ${getTagColor(tag)}"` : '';
+                            
+                            const isSelected = selectedTags.has(tag) ? 'selected' : '';
+
+                            return `
+                                <button onclick="toggleTag('${tag}')" 
+                                        class="tag-button ${isSelected}" 
+                                        data-tag="${tag}"
+                                        ${style}>
+                                    ${tag}
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+            }
+
+            // Add new function to toggle tags
+            function toggleTag(tag) {
+                if (selectedTags.has(tag)) {
+                    selectedTags.delete(tag);
+                } else {
+                    selectedTags.add(tag);
+                }
+                displayTags();
+                filterBySelectedTags();
+            }
+
+            // Modify the filter function to handle multiple tags
+            function filterBySelectedTags() {
+                const filteredPostsContainer = document.getElementById('filtered-posts');
+                
+                if (selectedTags.size === 0) {
+                    filteredPostsContainer.innerHTML = ''; // Clear if no tags selected
+                    return;
+                }
+
+                const filteredPosts = posts.filter(post => 
+                    post.tags.some(tag => selectedTags.has(tag))
+                );
+                
+                filteredPostsContainer.innerHTML = `
+                    <h2>Posts tagged with "${Array.from(selectedTags).join(', ')}"</h2>
+                    ${filteredPosts.map(post => `
+                        <div class="post">
+                            <div class="post-main-content">
+                                <h3><a href="posts/${post.slug}.html">${post.title}</a></h3>
+                                <div class="post-metadata">
+                                    <span class="date">${post.date}</span> • 
+                                    <span class="category"><a href="categories.html?category=${post.category}">${post.category}</a></span> • 
+                                    <span class="tags">${post.tags.map(t => 
+                                        `<a href="#" onclick="toggleTag('${t}'); return false;" 
+                                            class="${selectedTags.has(t) ? 'selected-tag' : ''}">${t}</a>`
+                                    ).join(", ")}</span>
+                                </div>
+                            </div>
+                            <div class="post-abstract">
+                                <a href="posts/${post.slug}.html">
+                                    <p>${post.abstract || "This is a placeholder abstract for the blog post. Click to read more..."}</p>
+                                </a>
+                            </div>
+                        </div>
+                    `).join('')}
+                `;
+            }
+
+            // Modify URL check to handle multiple tags
+            function checkUrlTag() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const tags = urlParams.getAll('tag');
+                if (tags.length > 0) {
+                    tags.forEach(tag => selectedTags.add(tag));
+                    displayTags();
+                    filterBySelectedTags();
+                }
+            }
+
+            // Initialize the page
+            displayTags();
+            checkUrlTag();
+        </script>
+    </main>
+
+    <footer>
+    </footer>
 </body>
 </html>
